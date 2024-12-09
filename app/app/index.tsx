@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { CameraView, Camera, CameraType } from 'expo-camera';
 import * as Linking from 'expo-linking';
 
@@ -7,7 +7,7 @@ export default function Index() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [cameraType, setCameraType] = useState<CameraType>('back');
-  const [count, setCount] = useState(0);
+  const [isScanning, setIsScanning] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -62,46 +62,54 @@ export default function Index() {
     );
   };
 
-  const handleButtonPress = () => {
-    setCount(count + 1);
-    Alert.alert('Button Pressed', `You've pressed the button ${count + 1} times`);
+  const handleBarCodeScanned = ({ type, data } : any) => {
+    setIsScanning(false);
+    Alert.alert(
+      '扫描结果',
+      `二维码内容: ${data}`,
+      [
+        {
+          text: '确定',
+          onPress: () => setIsScanning(true),
+        }
+      ]
+    );
   };
 
   if (isCameraOpen) {
     return (
-      <View style={styles.container}>
-        <CameraView 
-          style={StyleSheet.absoluteFillObject}
-          type={cameraType}
-        >
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity 
-              style={styles.cameraButton} 
-              onPress={toggleCameraType}
-            >
-              <Text style={styles.buttonText}>Flip Camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.cameraButton} 
-              onPress={handleCloseCamera}
-            >
-              <Text style={styles.buttonText}>Close Camera</Text>
-            </TouchableOpacity>
-          </View>
-        </CameraView>
+      <View style={StyleSheet.absoluteFillObject}>
+        <View style={styles.cameraContainer}>
+          <CameraView 
+            style={styles.camera}
+            facing={cameraType}
+            barcodeScannerSettings={{
+              barcodeTypes: ['qr'],
+            }}
+            onBarcodeScanned={isScanning ? handleBarCodeScanned : undefined}
+          >
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity 
+                style={styles.cameraButton} 
+                onPress={toggleCameraType}
+              >
+                <Text style={styles.buttonText}>Flip Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.cameraButton} 
+                onPress={handleCloseCamera}
+              >
+                <Text style={styles.buttonText}>Close Camera</Text>
+              </TouchableOpacity>
+            </View>
+          </CameraView>
+        </View>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={handleButtonPress}
-      >
-        <Text style={styles.buttonText}>Press Me</Text>
-      </TouchableOpacity>
       <Text>Camera Permission Status: {hasPermission ? 'Granted' : 'Not Granted'}</Text>
       <TouchableOpacity 
         style={styles.button} 
@@ -143,5 +151,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 15,
     borderRadius: 10,
+  },
+  cameraContainer: {
+    flex: 1,
+  },
+  camera: {
+    flex: 1,
   }
 });
