@@ -11,8 +11,11 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "This app needs access to the camera to scan QR codes."
-      }
+        "NSCameraUsageDescription": "This app needs access to the camera to scan QR codes.",
+        "NSBluetoothAlwaysUsageDescription": "This app needs access to Bluetooth to connect to nearby devices.",
+        "NSBluetoothPeripheralUsageDescription": "This app needs access to Bluetooth to connect to nearby devices."
+      },
+      "bundleIdentifier": "com.anonymous.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,8 +23,15 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.CAMERA"
-      ]
+        "android.permission.CAMERA",
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.app"
     },
     "web": {
       "bundler": "metro",
