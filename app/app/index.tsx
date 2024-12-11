@@ -1,13 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert, PermissionsAndroid } from 'react-native';
 import { CameraView, Camera, CameraType } from 'expo-camera';
 import * as Linking from 'expo-linking';
+import { BleManager } from 'react-native-ble-plx';
 
 export default function Index() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [cameraType, setCameraType] = useState<CameraType>('back');
   const [isScanning, setIsScanning] = useState(true);
+
+  const bleManager = new BleManager();
+
+  // 请求 Android 蓝牙权限
+  const requestBluetoothPermissions = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: '蓝牙权限',
+          message: '我们需要位置权限以扫描蓝牙设备',
+          buttonNeutral: '稍后询问',
+          buttonNegative: '取消',
+          buttonPositive: '确定',
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('位置权限已授予');
+      } else {
+        console.log('位置权限被拒绝');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  // 请求 iOS 蓝牙权限
+  bleManager.onStateChange((state) => {
+    if (state === 'PoweredOn') {
+      console.log('蓝牙已打开');
+    }
+  }, true);
+
+  requestBluetoothPermissions();
 
   useEffect(() => {
     (async () => {
