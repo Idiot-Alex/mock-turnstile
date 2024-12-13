@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@config-plugins/react-native-ble-plx':
+        specifier: ^7.0.0
+        version: 7.0.0(expo@52.0.17(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@expo/metro-runtime@4.0.0(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1)))(graphql@15.8.0)(react-native-webview@13.12.5(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1))(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1))
       '@expo/vector-icons':
         specifier: ^14.0.2
         version: 14.0.4
@@ -881,6 +884,12 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+
+  '@config-plugins/react-native-ble-plx@7.0.0':
+    resolution: {integrity: sha512-HgUc/Ya+UynufgQf5Q6d7ltc/wWQCruaYBCdWOM7CWSOxoyUXL0Htdxw5qRiul1wb3GO61EVk37KRiK7aT9seg==}
+    deprecated: react-native-ble-plx@>=3.1.1 now ships with an Expo config plugin.
+    peerDependencies:
+      expo: ^49
 
   '@egjs/hammerjs@2.0.17':
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
@@ -6124,6 +6133,10 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.9
 
   '@bcoe/v8-coverage@0.2.3': {}
+
+  '@config-plugins/react-native-ble-plx@7.0.0(expo@52.0.17(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@expo/metro-runtime@4.0.0(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1)))(graphql@15.8.0)(react-native-webview@13.12.5(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1))(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1))':
+    dependencies:
+      expo: 52.0.17(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@expo/metro-runtime@4.0.0(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1)))(graphql@15.8.0)(react-native-webview@13.12.5(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1))(react-native@0.76.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.14)(react@18.3.1))(react@18.3.1)
 
   '@egjs/hammerjs@2.0.17':
     dependencies:

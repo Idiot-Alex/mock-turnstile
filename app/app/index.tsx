@@ -4,13 +4,14 @@ import { CameraView, Camera, CameraType } from 'expo-camera';
 import * as Linking from 'expo-linking';
 import { BleManager } from 'react-native-ble-plx';
 
+const bleManager = new BleManager();
+
 export default function Index() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [cameraType, setCameraType] = useState<CameraType>('back');
   const [isScanning, setIsScanning] = useState(true);
 
-  const bleManager = new BleManager();
 
   // 请求 Android 蓝牙权限
   const requestBluetoothPermissions = async () => {
@@ -35,20 +36,18 @@ export default function Index() {
     }
   };
 
-  // 请求 iOS 蓝牙权限
   bleManager.onStateChange((state) => {
     if (state === 'PoweredOn') {
       console.log('蓝牙已打开');
     }
   }, true);
 
-  requestBluetoothPermissions();
-
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
+    requestBluetoothPermissions();
   }, []);
 
   const handleOpenCamera = async () => {
